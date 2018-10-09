@@ -1,30 +1,22 @@
 /* eslint import/no-webpack-loader-syntax: off */
-
-// Import React
-import React, { Fragment } from "react";
-
-// Import Spectacle Core tags
+import React from "react";
 import {
-    BlockQuote,
-    Cite,
-    Deck,
-    Heading,
-    ListItem,
-    List,
-    Quote,
-    Slide,
-    Text,
-    CodePane,
-    Notes,
     Appear,
     Code,
+    CodePane,
+    Deck,
+    Heading,
+    List,
+    ListItem,
+    Notes,
+    Slide,
+    Text,
 } from "spectacle";
-
-// Import theme
 import createTheme from "spectacle/lib/themes/default";
-import { loadLanguages } from "prismjs";
-import { spawnSync } from "child_process";
 
+// Import React
+// Import Spectacle Core tags
+// Import theme
 // Require CSS
 require("normalize.css");
 
@@ -232,7 +224,7 @@ strArray = [42, "world"]; // Error!`}
                         and protects you from errors like assigning a member of the wrong type.
                     </Notes>
                 </Slide>
-                <Slide>
+                {/* <Slide>
                     <Heading>Interfaces</Heading>
                     <div style={{ display: "flex" }}>
                         <div style={{ flexBasis: "50%" }}>
@@ -303,7 +295,8 @@ person1 = {
                         Interfaces are the core way in TypeScript to compose multiple type
                         annotations into a single named annotation.
                     </Notes>
-                </Slide>
+                    <Notes>show example with optional member middleName</Notes>
+                </Slide> */}
                 <Slide>
                     <Heading>Interfaces</Heading>
                     {
@@ -335,7 +328,10 @@ person1 = {
                         }
                     </Appear>
 
-                    <Notes>Optional member</Notes>
+                    <Notes>
+                        Interfaces are the core way in TypeScript to compose multiple type
+                        annotations into a single named annotation. Optional member example
+                    </Notes>
                 </Slide>
                 <Slide>
                     <Heading>Interfaces</Heading>
@@ -363,10 +359,19 @@ person1 = {
     firstName: "John",
     lastName: "Doe",
     age: "42", // Error! wrong type
+};
+
+// Error
+person1 = {
+    firstName: "John",
+    middleName: "V",
+    // Error! lastName is missing
+    age: 42,
 };`}
                             />
                         }
                     </Appear>
+                    <Notes>Error examples</Notes>
                 </Slide>
                 <Slide>
                     <Heading fit>Strict Object Literal Checking</Heading>
@@ -387,6 +392,7 @@ logName(animal); // OK
 logName(random); // Error: property \`name\` is missing`}
                         />
                     }
+                    <Notes>error because name is required memeber of the required object</Notes>
                 </Slide>
 
                 <Slide>
@@ -467,7 +473,8 @@ num = vehicle;`}
                     <Notes>
                         Escape hatch from the type system to tell the compiler to fuck off. any is
                         compatible with any and all types in the type system. This means that
-                        anything can be assigned to it and it can be assigned to anything
+                        anything can be assigned to it and it can be assigned to anything. Use with
+                        caution.
                     </Notes>
                 </Slide>
 
@@ -585,12 +592,12 @@ doStuff(42, 3); // Error!`}
                         />
                     }
                     <Notes>
-                        You can annotate function parameters just like you can annotate other
-                        variables. You can annotate the return type after the function parameter
-                        list with the same style as you use for a variable, e.g. : string in this
-                        example. Quite commonly you don't need to annotate the return type of a
-                        function as it can generally be inferred by the compiler. However it is
-                        generally a good idea to add these annotation to help with errors
+                        can annotate function parameters just like other variables. You can annotate
+                        the return type after the function parameter list with the same style as you
+                        use for a variable, e.g. : string in this example. Quite commonly you don't
+                        need to annotate the return type of a function as it can generally be
+                        inferred by the compiler. However it is generally a good idea to add these
+                        annotation to help with errors
                     </Notes>
                 </Slide>
                 <Slide>
@@ -998,17 +1005,15 @@ joe.name = "Joseph";`}
                             />
                         }
                     </Appear>
+
                     <Notes>
                         TypeScript allows you to override its inferred and analyzed view of types in
                         any way you want to. Powerful and dangerous. It's you telling the compiler
                         that you know about the types better than it does, and that it should not
-                        second guess you.
-                    </Notes>
-                    <Notes>
-                        The reason why it's not called "type casting" is that casting generally
-                        implies some sort of runtime support. However type assertions are purely a
-                        compile time construct and a way for you to provide hints to the compiler on
-                        how you want your code to be analyzed.
+                        second guess you. The reason why it's not called "type casting" is that
+                        casting generally implies some sort of runtime support. However type
+                        assertions are purely a compile time construct and a way for you to provide
+                        hints to the compiler on how you want your code to be analyzed.
                     </Notes>
                 </Slide>
                 <Slide>
