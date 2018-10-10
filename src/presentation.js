@@ -1,23 +1,13 @@
 /* eslint import/no-webpack-loader-syntax: off */
 import React from "react";
-import {
-    Appear,
-    Code,
-    CodePane,
-    Deck,
-    Heading,
-    List,
-    ListItem,
-    Notes,
-    Slide,
-    Text,
-} from "spectacle";
+import { Code, CodePane, Deck, Heading, List, ListItem, Notes, Slide, Text } from "spectacle";
 import createTheme from "spectacle/lib/themes/default";
+import FormidableLogo from "./Formidable_Red.svg";
+import dev1 from "./dev1.gif";
+import drake from "./drake.jpg";
+import compileError from "./compile-error.png";
+import xundefined from "./undefined.png";
 
-// Import React
-// Import Spectacle Core tags
-// Import theme
-// Require CSS
 require("normalize.css");
 
 let theme = createTheme(
@@ -25,12 +15,12 @@ let theme = createTheme(
         primary: "#2a2734",
         secondary: "white",
         tertiary: "#03A9FC",
-        quartenary: "#CECECE",
+        quartenary: "#CECECE"
     },
     {
         primary: "Montserrat",
-        secondary: "Helvetica",
-    },
+        secondary: "Helvetica"
+    }
 );
 
 theme.screen.components.codePane.fontSize = "1.2rem";
@@ -49,7 +39,21 @@ export default class Presentation extends React.Component {
                         writing JavaScript without the pain
                     </Heading>
                     <Text margin="5rem 0 0" textColor="quartenary" textSize={40}>
-                        Steven Musumeche, Lead Developer on Conversations
+                        Steven Musumeche, Senior Software Engineer at Formidable
+                    </Text>
+                </Slide>
+                <Slide>
+                    <div>
+                        <img
+                            src={FormidableLogo}
+                            alt="formidable logo"
+                            style={{ width: "50%", margin: "-50px 0" }}
+                        />
+                    </div>
+                    <Text textColor="secondary" margin="0">
+                        Formidable is a Seattle, Denver, and London-based engineering consultancy
+                        and open source software organization, specializing in React.js, React
+                        Native, GraphQL, Node.js, and the extended JavaScript ecosystem.
                     </Text>
                 </Slide>
                 <Slide>
@@ -58,8 +62,8 @@ export default class Presentation extends React.Component {
                         Strongly-typed programming language that compiles to JavaScript
                     </Text>
                     <Notes>
-                        TypeScript compiles into JavaScript. JavaScript is what you are actually
-                        going to execute
+                        <p>Compiles into JavaScript.</p>{" "}
+                        <p>JavaScript is what you are actually going to execute</p>
                     </Notes>
                 </Slide>
                 <Slide>
@@ -87,30 +91,43 @@ export default class Presentation extends React.Component {
                             PHP, JavaScript, Python
                         </Text>
                     </div>
-                    <Appear>
-                        <div>
-                            <Heading size={3} textColor="tertiary" margin=".5em 0 0">
-                                Statically Typed
-                            </Heading>
-                            <Text textColor="secondary">Type info acquired at compile time</Text>
-                            <Text textColor="quartenary" italic>
-                                Java, TypeScript, C, Swift
-                            </Text>
-                        </div>
-                    </Appear>
+                    <div>
+                        <Heading size={3} textColor="tertiary" margin=".5em 0 0">
+                            Statically Typed
+                        </Heading>
+                        <Text textColor="secondary">Type info acquired at compile time</Text>
+                        <Text textColor="quartenary" italic>
+                            Java, TypeScript, C, Swift
+                        </Text>
+                    </div>
+                </Slide>
+                <Slide>
+                    <table>
+                        <tr>
+                            <td rowspan="2">
+                                <img src={drake} />
+                            </td>
+                            <td>
+                                <img src={xundefined} style={{ width: "50vw" }} />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <img src={compileError} style={{ width: "50vw" }} />
+                            </td>
+                        </tr>
+                    </table>
                 </Slide>
                 <Slide>
                     <Heading fit>Why TypeScript?</Heading>
-                    <List ordered>
-                        <ListItem>Provides an optional type system for JavaScript</ListItem>
-                        <ListItem>Use future JavaScript now</ListItem>
-                    </List>
-                    <Notes>This is an overview. We will go through more detailed reasons now</Notes>
+                    <Notes>I can't imagine writing a larger javascript project without it</Notes>
                 </Slide>
                 <Slide>
                     <Heading>Enhances Code Quality</Heading>
                     <Notes>
-                        Types have proven ability to enhance code quality and understandability.
+                        <p>
+                            Types have proven ability to enhance code quality and understandability.
+                        </p>
                         Large teams (Google, Microsoft, Facebook) have continually arrived at this
                         conclusion.
                     </Notes>
@@ -118,8 +135,12 @@ export default class Presentation extends React.Component {
                 <Slide>
                     <Heading>Eases Refactoring</Heading>
                     <Notes>
-                        Types increase your agility when doing refactoring. It's better for the
-                        compiler to catch errors than to have things fail at runtime.
+                        <p>Types increase your agility when doing refactoring.</p>{" "}
+                        <p>
+                            It's better for the compiler to catch errors than to have things fail at
+                            runtime.
+                        </p>
+                        <p>really easy to rename or move things across files</p>
                     </Notes>
                 </Slide>
                 <Slide>
@@ -130,6 +151,35 @@ export default class Presentation extends React.Component {
                     </Notes>
                 </Slide>
                 <Slide>
+                    <CodePane
+                        lang="js"
+                        textSize=".9rem"
+                        source={`interface Props {
+  children: string;
+  size: "small" | "med" | "large";
+}
+
+export class Button extends React.Component<Props> {
+  calcSize() {
+    // ...etc
+    return 42;
+  }
+
+  render() {
+    return (
+      <button style={{ fontSize: this.calcSize() }}>
+        {this.props.children}
+      </button>
+    );
+  }
+}`}
+                    />
+                    <Notes>
+                        The props that this react component takes are documented and enforced by the
+                        compiler.
+                    </Notes>
+                </Slide>
+                <Slide>
                     <Heading>Developer Productivity</Heading>
                     <Notes>
                         Enables IDEs to provide a richer environment for spotting common errors as
@@ -137,25 +187,36 @@ export default class Presentation extends React.Component {
                     </Notes>
                 </Slide>
                 <Slide>
+                    <img src={dev1} style={{ width: "100vw" }} />
+                </Slide>
+                <Slide>
                     <Heading>Future Javascript, Now</Heading>
                     <Notes>
-                        Provide planned features from future JavaScript editions to current
-                        JavaScript engines. TypeScript provides a number of features that are
-                        planned (similar to Babel), and emits JavaScript that can run in older
-                        browsers.
+                        <p>
+                            Provide planned features from future JavaScript editions to current
+                            JavaScript engines.
+                        </p>
+                        <p>
+                            TypeScript provides a number of features that are planned (similar to
+                            Babel), and emits JavaScript that can run in older browsers.
+                        </p>
                     </Notes>
                 </Slide>
                 <Slide>
                     <Heading>Biggest Downside? Verbosity</Heading>
                     <Notes>
-                        A few ways to counteract that that we will discuss. 1. Types are completely
-                        optional. 2. Types can be implicit. 3. Type errors do not prevent JS emit.
-                        4. Types can be ambient (Definitly Typed)
+                        <p>A few ways to counteract that that we will discuss.</p>
+                        <ol>
+                            <li>Types are completely optional</li>
+                            <li>Types can be implicit</li>
+                            <li>Type errors do not prevent JS emit</li>
+                            <li>Types can be ambient (Definitly Typed)</li>
+                        </ol>
                     </Notes>
                 </Slide>
                 <Slide>
                     <Heading lineHeight={1.5}>Configuration</Heading>
-                    <Text textColor="secondary">Enable noImplicitAny and stringNullChecks</Text>
+                    <Text textColor="secondary">Enable noImplicitAny and strictNullChecks</Text>
                     <Notes>Brief into to tsconfig.json and strict mode</Notes>
                 </Slide>
                 <Slide>
@@ -210,7 +271,7 @@ bool = 1; // Error`}
 strArray = ["hello", "world"];
 console.log(strArray[0]); // 'hello'
 
-strArray[1] = "naperville"; // OK
+strArray[1] = "lafayette"; // OK
 strArray = ["goodbye", "cruel", "world"]; // OK
 
 strArray[0] = false; // Error!
@@ -219,84 +280,15 @@ strArray = [42, "world"]; // Error!`}
                         />
                     }
                     <Notes>
-                        The syntax is basically postfixing [] to any valid type annotation. It
-                        allows you to safely do any array manipulation that you would normally do
-                        and protects you from errors like assigning a member of the wrong type.
+                        <p>The syntax is basically postfixing [] to any valid type annotation.</p>
+                        <p>
+                            It allows you to safely do any array manipulation that you would
+                            normally do and protects you from errors like assigning a member of the
+                            wrong type.
+                        </p>
                     </Notes>
                 </Slide>
-                {/* <Slide>
-                    <Heading>Interfaces</Heading>
-                    <div style={{ display: "flex" }}>
-                        <div style={{ flexBasis: "50%" }}>
-                            <Appear>
-                                {
-                                    <CodePane
-                                        textSize=".9rem"
-                                        lang="js"
-                                        source={`interface Person {
-    firstName: string;
-    middleName?: string; // optional member
-    lastName: string;
-    age: number;
-}`}
-                                    />
-                                }
-                            </Appear>
-                            <Appear>
-                                {
-                                    <CodePane
-                                        textSize=".9rem"
-                                        lang="js"
-                                        source={`// OK
-let person1: Person;
-person1 = {
-    firstName: "John",
-    // not an error, because middleName is optional
-    lastName: "Doe",
-    age: 42,
-};`}
-                                    />
-                                }
-                            </Appear>
-                        </div>
-                        <div style={{ flexBasis: "50%" }}>
-                            <Appear>
-                                {
-                                    <CodePane
-                                        textSize=".9rem"
-                                        lang="js"
-                                        source={`// Error
-person1 = {
-    firstName: "John",
-    lastName: "Doe",
-    age: "42", // Error! wrong type
-};`}
-                                    />
-                                }
-                            </Appear>
-                            <Appear>
-                                {
-                                    <CodePane
-                                        textSize=".9rem"
-                                        lang="js"
-                                        source={`// Error
-person1 = {
-    firstName: "John",
-    middleName: "V",
-    // Error! lastName is missing
-    age: 42,
-};`}
-                                    />
-                                }
-                            </Appear>
-                        </div>
-                    </div>
-                    <Notes>
-                        Interfaces are the core way in TypeScript to compose multiple type
-                        annotations into a single named annotation.
-                    </Notes>
-                    <Notes>show example with optional member middleName</Notes>
-                </Slide> */}
+
                 <Slide>
                     <Heading>Interfaces</Heading>
                     {
@@ -311,12 +303,11 @@ person1 = {
 }`}
                         />
                     }
-                    <Appear>
-                        {
-                            <CodePane
-                                textSize=".9rem"
-                                lang="js"
-                                source={`// OK
+                    {
+                        <CodePane
+                            textSize=".9rem"
+                            lang="js"
+                            source={`// OK
 let person1: Person;
 person1 = {
     firstName: "John",
@@ -324,13 +315,16 @@ person1 = {
     lastName: "Doe",
     age: 42,
 };`}
-                            />
-                        }
-                    </Appear>
+                        />
+                    }
 
                     <Notes>
-                        Interfaces are the core way in TypeScript to compose multiple type
-                        annotations into a single named annotation. Optional member example
+                        <p>
+                            Interfaces are the core way in TypeScript to compose multiple type
+                            annotations into a single named annotation.
+                        </p>
+
+                        <p>Optional member example here</p>
                     </Notes>
                 </Slide>
                 <Slide>
@@ -349,12 +343,11 @@ person1 = {
                         />
                     }
 
-                    <Appear>
-                        {
-                            <CodePane
-                                textSize=".9rem"
-                                lang="js"
-                                source={`// Error
+                    {
+                        <CodePane
+                            textSize=".9rem"
+                            lang="js"
+                            source={`// Error
 person1 = {
     firstName: "John",
     lastName: "Doe",
@@ -368,9 +361,8 @@ person1 = {
     // Error! lastName is missing
     age: 42,
 };`}
-                            />
-                        }
-                    </Appear>
+                        />
+                    }
                     <Notes>Error examples</Notes>
                 </Slide>
                 <Slide>
@@ -471,10 +463,15 @@ num = vehicle;`}
                         />
                     }
                     <Notes>
-                        Escape hatch from the type system to tell the compiler to fuck off. any is
-                        compatible with any and all types in the type system. This means that
-                        anything can be assigned to it and it can be assigned to anything. Use with
-                        caution.
+                        <p>
+                            Any is the escape hatch from the type system to tell the compiler to
+                            fuck off.
+                        </p>
+                        <p>
+                            any is compatible with any and all types in the type system. This means
+                            that anything can be assigned to it and it can be assigned to anything.
+                        </p>
+                        <p>Use with caution.</p>
                     </Notes>
                 </Slide>
 
@@ -524,40 +521,25 @@ function formatCommandline(command: string | string[]) {
                         />
                     }
                     <Notes>
-                        Quite commonly in JavaScript you want to allow a property to be one of
-                        multiple types e.g. a string or a number. This is where the union type comes
-                        in handy. A common use case is a function that can take a single object or
-                        an array of the object.
+                        <p>
+                            Quite commonly in JavaScript you want to allow a property to be one of
+                            multiple types e.g. a string or a number.
+                        </p>
+                        <p>This is where the union type comes in handy.</p>{" "}
+                        <p>
+                            A common use case is a function that can take a single object or an
+                            array of the object.
+                        </p>
                     </Notes>
                 </Slide>
                 <Slide>
                     <Heading lineHeight={1.5}>Type Aliases</Heading>
-                    <div style={{ display: "flex" }}>
-                        <div style={{ flexBasis: "45%" }}>
-                            {
-                                <CodePane
-                                    textSize="1.2rem"
-                                    lang="js"
-                                    source={`type StrOrNum = string | number;
 
-// use just like any other type 
-var sample: StrOrNum;
-
-sample = 123; // OK
-sample = "123"; // OK
-sample = true; // Error!`}
-                                />
-                            }
-                        </div>
-
-                        <div style={{ flexBasis: "55%" }}>
-                            <Appear>
-                                {
-                                    <CodePane
-                                        textSize="1.2rem"
-                                        lang="js"
-                                        source={`type Coordinates 
-    = { lat: number; long: number };
+                    {
+                        <CodePane
+                            textSize="1.2rem"
+                            lang="js"
+                            source={`type Coordinates = { lat: number; long: number };
 
 let myLocation: Coordinates;
 
@@ -565,11 +547,8 @@ let myLocation: Coordinates;
 myLocation = { lat: 48.423, long: -89.74 };
 // Error!
 myLocation = { lat: 48.423, long: null };`}
-                                    />
-                                }
-                            </Appear>
-                        </div>
-                    </div>
+                        />
+                    }
                     <Notes>
                         convenient syntax for providing names for type annotations that you would
                         like to use in more than one place or give it a symantic name.
@@ -586,18 +565,22 @@ myLocation = { lat: 48.423, long: null };`}
     // return false; // Error!
 }
 
-doStuff("DealerInspire", 5); // OK
-doStuff("DealerInspire"); // Error!
+doStuff("AcadianaSoftwareGroup", 5); // OK
+doStuff("AcadianaSoftwareGroup"); // Error!
 doStuff(42, 3); // Error!`}
                         />
                     }
                     <Notes>
-                        can annotate function parameters just like other variables. You can annotate
-                        the return type after the function parameter list with the same style as you
-                        use for a variable, e.g. : string in this example. Quite commonly you don't
-                        need to annotate the return type of a function as it can generally be
-                        inferred by the compiler. However it is generally a good idea to add these
-                        annotation to help with errors
+                        <p>you can annotate function parameters just like other variables.</p>{" "}
+                        <p>
+                            You can annotate the return type after the function parameter list with
+                            the same style as you use for a variable, e.g. : string in this example.
+                        </p>
+                        <p>
+                            return type of a function as it can generally be inferred by the
+                            compiler. However it is generally a good idea to add these annotation to
+                            help with errors
+                        </p>
                     </Notes>
                 </Slide>
                 <Slide>
@@ -622,10 +605,10 @@ function makePerson(firstName: string, lastName: string, age: number, salutation
     // };
 }
 
-const jLow = makePerson("Jonathan", "Lowsley", 28); // OK
-const godfather = makePerson("Jonathan", "Delgado", 24, "Sir"); // OK
-const jRod = makePerson("James", 34, "Rodenkirch"); // Error!
-const gReiss = makePerson("Gary", "Reiss"); // Error!`}
+const jWright = makePerson("Johnathon", "Wright", 28); // OK
+const godfather = makePerson("Chris", "Parich", 24, "Sir"); // OK
+const dSmith = makePerson("Davin", 34, "Smith"); // Error!
+const aSonge = makePerson("Alex", "Songe"); // Error!`}
                         />
                     }
                     <Notes>
@@ -657,16 +640,21 @@ const gReiss = makePerson("Gary", "Reiss"); // Error!`}
                         />
                     }
                     <Notes>
-                        JavaScript is inherently a very dynamic language. It’s not uncommon for a
-                        single JavaScript function to return different types of objects based on the
-                        shape of the arguments passed in. TypeScript allows you to declare function
-                        overloads. This is useful for documentation + type safety purpose.
-                    </Notes>
-                    <Notes>
-                        If you look at the code carefully you realize the meaning of a,b,c,d change
-                        based on how many arguments are passed in. Also the function only expects 1,
-                        2 or 4 arguments. These constraints can be enforced and documented using
-                        function overloading.
+                        <p>
+                            JavaScript is inherently a very dynamic language. It’s not uncommon for
+                            a single JavaScript function to return different types of objects based
+                            on the shape of the arguments passed in.
+                        </p>
+                        <p>
+                            TypeScript allows you to declare function overloads. This is useful for
+                            documentation + type safety purpose.
+                        </p>
+                        <p>
+                            If you look at the code carefully you realize the meaning of a,b,c,d
+                            change based on how many arguments are passed in. Also the function only
+                            expects 1, 2 or 4 arguments. These constraints can be enforced and
+                            documented using function overloading.
+                        </p>
                     </Notes>
                 </Slide>
                 <Slide>
@@ -702,12 +690,17 @@ padding(1, 1, 1); // Error: Not a part of the available overloads`}
                         />
                     }
                     <Notes>
-                        declare the function header multiple times, the last function header is the
-                        one that is actually active within the function body but is not available to
-                        the outside world. Of course it's important for the final declaration (the
-                        true declaration as seen from inside the function) to be compatible with all
-                        the overloads. This is because that is the true nature of the function calls
-                        that the function body needs to account for
+                        <p>declare the function header multiple times</p>
+                        <p>
+                            the last function header is the one that is actually active within the
+                            function body but is not available to the outside world.
+                        </p>
+                        <p>
+                            Of course it's important for the final declaration (the true declaration
+                            as seen from inside the function) to be compatible with all the
+                            overloads. This is because that is the true nature of the function calls
+                            that the function body needs to account for
+                        </p>
                     </Notes>
                 </Slide>
                 <Slide>
@@ -812,7 +805,7 @@ bar[0] = "hello"; // Error! cannot assign \`string\` to a \`number\``}
                         creation)
                     </Notes>
                 </Slide>
-                <Slide>
+                {/* <Slide>
                     <Heading lineHeight={1.5} fit>
                         Type Inference: Destructuring
                     </Heading>
@@ -835,20 +828,20 @@ a = "hello"; // Error! cannot assign \`string\` to a \`number\``}
                         />
                     }
                     <Notes>they also work with destructuring, both objects and arrays</Notes>
-                </Slide>
+                </Slide> */}
                 <Slide>
                     <Heading lineHeight={1.2}>Enums</Heading>
                     {
                         <CodePane
                             lang="js"
-                            source={`enum ConversationType {
-    Web,
+                            source={`enum SocialNetworkType {
+    Twitter,
     Facebook,
-    SMS,
+    Google,
 }
 
 // Sample Usage
-let type = ConversationType.Facebook;
+let type = SocialNetworkType.Facebook;
 
 // Safety
 type = 'not in enum'; // Error!`}
@@ -867,15 +860,15 @@ type = 'not in enum'; // Error!`}
                     {
                         <CodePane
                             lang="js"
-                            source={`enum ConversationType {
-    Web,        // 0
-    Facebook,   // 1
-    SMS,        // 2
+                            source={`enum SocialNetworkType {
+    Twitter,     // 0
+    Facebook,    // 1
+    Google,      // 2
 }
 
-let type = ConversationType.Facebook;
+let type = SocialNetworkType.Facebook;
 
-// Effectively the same as ConversationType.Facebook
+// Effectively the same as SocialNetworkType.Facebook
 type = 1;`}
                         />
                     }
@@ -890,17 +883,15 @@ type = 1;`}
                     {
                         <CodePane
                             lang="js"
-                            source={`export enum ConversationType {
-    web = "web",
-    sms = "sms",
-    facebook = "facebook",
-    facebookMarketplace = "facebook_marketplace",
-    googleMyBusiness = "google_my_business",
+                            source={`export enum SocialNetworkType {
+    Twitter = "twitter",
+    Facebook = "facebook",
+    Google = "google",
 }
 
-let type = ConversationType.sms;
+let type = SocialNetworkType.Google;
 
-type = ConversationType.facebook; // OK
+type = SocialNetworkType.Facebook; // OK
 type = 'facebook'; // Error!`}
                         />
                     }
@@ -910,7 +901,6 @@ type = 'facebook'; // Error!`}
                     </Notes>
                 </Slide>
                 <Slide>
-                    <Heading lineHeight={1.2}>Generics</Heading>
                     {
                         <CodePane
                             lang="js"
@@ -928,14 +918,10 @@ queue.pop(); // 'hello'
 queue.pop(); // 'world'`}
                         />
                     }
-                    <Notes>
-                        The key motivation for generics is to provide meaningful type constraints on
-                        generic functions. They can affect function arguments, return values, class
-                        instance members and methods.
-                    </Notes>
+                    <Notes>dynamic nature of javascript allows this (good and bad)</Notes>
                 </Slide>
+
                 <Slide>
-                    <Heading lineHeight={1.2}>Generics</Heading>
                     {
                         <CodePane
                             lang="js"
@@ -974,6 +960,11 @@ queue.push("1"); // Error! cannot push a string. Only numbers allowed`}
                         What you really want is a way to say that whatever the type is of the stuff
                         getting pushed it should be the same for whatever gets popped. This is done
                         easily with a generic parameter (in this case, at the class level):
+                        <p>
+                            The key motivation for generics is to provide meaningful type
+                            constraints on generic functions. They can affect function arguments,
+                            return values, class instance members and methods.
+                        </p>
                     </Notes>
                 </Slide>
                 <Slide>
@@ -993,27 +984,30 @@ mike.age = 54; // Error: property 'age' does not exist on \`{}\`
 mike.name = "Michal"; // Error: property 'name' does not exist on \`{}\``}
                         />
                     }
-                    <Appear>
-                        {
-                            <CodePane
-                                lang="js"
-                                source={`
+                    {
+                        <CodePane
+                            lang="js"
+                            source={`
 // OK with type assertion
 let joe = {} as Person;
 joe.age = 37;
 joe.name = "Joseph";`}
-                            />
-                        }
-                    </Appear>
+                        />
+                    }
 
                     <Notes>
-                        TypeScript allows you to override its inferred and analyzed view of types in
-                        any way you want to. Powerful and dangerous. It's you telling the compiler
-                        that you know about the types better than it does, and that it should not
-                        second guess you. The reason why it's not called "type casting" is that
-                        casting generally implies some sort of runtime support. However type
-                        assertions are purely a compile time construct and a way for you to provide
-                        hints to the compiler on how you want your code to be analyzed.
+                        TypeScript allows you to override its inferred view of types in any way you
+                        want to. <p>Powerful and dangerous.</p>{" "}
+                        <p>
+                            It's you telling the compiler that you know about the types better than
+                            it does, and that it should not second guess you.
+                        </p>
+                        <p>
+                            The reason why it's not called "type casting" is that casting generally
+                            implies some sort of runtime support. However type assertions are purely
+                            a compile time construct and a way for you to provide hints to the
+                            compiler on how you want your code to be analyzed.
+                        </p>
                     </Notes>
                 </Slide>
                 <Slide>
@@ -1035,11 +1029,11 @@ joe.name.toLowerCase(); // RUNTIME ERROR!`}
                         />
                     }
                     <Notes>
-                        In many cases assertion will allow you to easily migrate legacy code (and
-                        even copy paste other code samples into your codebase), however you should
-                        be careful with your use of assertions. Take our original code as a sample,
-                        the compiler will not protect you from forgetting to actually add the
-                        properties you promised
+                        <p>you should be careful with your use of assertions.</p>
+                        <p>
+                            Take our original code as a sample, the compiler will not protect you
+                            from forgetting to actually add the properties you promised
+                        </p>
                     </Notes>
                 </Slide>
                 <Slide>
@@ -1065,7 +1059,7 @@ joe.name.toLowerCase(); // RUNTIME ERROR!`}
                         conditional block. You can use typeof, instanceof, or in.
                     </Notes>
                 </Slide>
-                <Slide>
+                {/* <Slide>
                     {
                         <CodePane
                             textSize=".8rem"
@@ -1098,7 +1092,7 @@ function doCoolStuff(arg: Person | Cat) {
                         />
                     }
                     <Notes>This is an example using instanceof.</Notes>
-                </Slide>
+                </Slide> */}
                 <Slide>
                     {
                         <CodePane
@@ -1226,9 +1220,6 @@ function doCoolStuff(arg: Person | Cat) {
                         </ListItem>
                         <ListItem>Playground - https://www.typescriptlang.org/play/</ListItem>
                     </List>
-                </Slide>
-                <Slide>
-                    <Heading>Thanks for coming!</Heading>
                 </Slide>
             </Deck>
         );
